@@ -38,34 +38,24 @@ async def main():
     # 3. Add sources to the notebook
     print("\n3. Adding sources to notebook...")
 
-    # Example: Add from URL
-    try:
-        from content_core import Content
-
-        # Add a URL source
-        print("   Adding source from URL...")
-        content = await Content.from_url("https://example.com/article")
-        source = await notebook.add_source(content)
-        print(f"   ✓ Added: {source.title}")
-    except Exception as e:
-        print(f"   ⚠ Skipped URL example (requires network): {e}")
-
     # Example: Add from text
-    print("\n   Adding source from text...")
+    print("   Adding source from text...")
     text_content = """
     Artificial Intelligence (AI) has revolutionized many industries.
     Machine learning models can now perform complex tasks that were once
     thought to be exclusive to humans. Natural language processing, computer
     vision, and robotics are among the key areas seeing rapid advancement.
     """
-    from content_core import Content, ContentType
 
-    content = Content(
-        content_type=ContentType.text,
+    # Create a source object directly
+    from open_notebook import Source
+
+    source = Source(
         title="AI Overview",
-        content=text_content.strip(),
+        full_text=text_content.strip()
     )
-    source = await notebook.add_source(content)
+    await source.save()
+    await source.add_to_notebook(notebook.id)
     print(f"   ✓ Added: {source.title}")
 
     # 4. List sources in the notebook
@@ -73,7 +63,7 @@ async def main():
     sources = await notebook.get_sources()
     print(f"   Found {len(sources)} source(s):")
     for src in sources:
-        print(f"   - {src.title} (Type: {src.source_type})")
+        print(f"   - {src.title}")
 
     # 5. Archive notebook (optional)
     print("\n5. Notebook management...")
