@@ -9,22 +9,20 @@ __version__ = "2.0.0-alpha"
 # Core domain models
 from open_notebook.domain.notebook import Notebook, Source, Note, SourceInsight
 from open_notebook.domain.models import Model, ModelManager
-from open_notebook.domain.podcast import Podcast, SpeakerProfile
+from open_notebook.domain.podcast import PodcastEpisode, SpeakerProfile, EpisodeProfile
 from open_notebook.domain.transformation import Transformation
 
 # Exceptions
 from open_notebook.exceptions import (
-    InvalidInputError,
+    OpenNotebookError,
     DatabaseOperationError,
-    APIError,
-    OpenNotebookException,
+    ExternalServiceError,
+    InvalidInputError,
+    NotFoundError,
 )
 
 # Configuration
-from open_notebook.config import (
-    get_config,
-    LANGGRAPH_CHECKPOINT_FILE,
-)
+from open_notebook.config import LANGGRAPH_CHECKPOINT_FILE
 
 # Export main classes
 __all__ = [
@@ -37,16 +35,17 @@ __all__ = [
     "SourceInsight",
     "Model",
     "ModelManager",
-    "Podcast",
+    "PodcastEpisode",
     "SpeakerProfile",
+    "EpisodeProfile",
     "Transformation",
     # Exceptions
-    "InvalidInputError",
+    "OpenNotebookError",
     "DatabaseOperationError",
-    "APIError",
-    "OpenNotebookException",
+    "ExternalServiceError",
+    "InvalidInputError",
+    "NotFoundError",
     # Config
-    "get_config",
     "LANGGRAPH_CHECKPOINT_FILE",
 ]
 

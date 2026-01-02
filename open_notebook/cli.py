@@ -195,54 +195,22 @@ def chat(notebook_id: str, question: str, model: Optional[str]):
     asyncio.run(_chat())
 
 
-@cli.group()
-def podcasts():
-    """Manage podcasts"""
-    pass
-
-
-@podcasts.command("generate")
-@click.argument("notebook_id")
-@click.option("--speakers", "-s", default=2, type=int, help="Number of speakers (1-4)")
-@click.option("--model", "-m", help="AI model to use")
-def generate_podcast(notebook_id: str, speakers: int, model: Optional[str]):
-    """Generate a podcast from notebook sources"""
-
-    if not 1 <= speakers <= 4:
-        click.echo("Error: Number of speakers must be between 1 and 4")
-        sys.exit(1)
-
-    async def _generate():
-        from open_notebook import Notebook, Podcast
-        from open_notebook.domain.podcast import SpeakerProfile
-
-        nb = await Notebook.get(notebook_id)
-        sources = await nb.get_sources()
-
-        if not sources:
-            click.echo(f"Error: No sources found in notebook: {nb.name}")
-            sys.exit(1)
-
-        click.echo(f"\n🎙️ Generating podcast for: {nb.name}")
-        click.echo(f"📚 Using {len(sources)} source(s)")
-        click.echo(f"🗣️ Speakers: {speakers}\n")
-
-        # Create podcast
-        podcast = await Podcast.create(
-            notebook_id=nb.id,
-            speaker_count=speakers,
-            model_override=model,
-        )
-
-        click.echo(f"\n✓ Podcast generated!")
-        click.echo(f"  ID: {podcast.id}")
-        click.echo(f"  Status: {podcast.status}")
-
-        if podcast.transcript:
-            click.echo(f"\n📝 Transcript Preview:")
-            click.echo(podcast.transcript[:500] + "..." if len(podcast.transcript) > 500 else podcast.transcript)
-
-    asyncio.run(_generate())
+# Podcast command commented out - requires more complex setup
+# Use the Python API directly for podcast generation
+# @cli.group()
+# def podcasts():
+#     """Manage podcasts (coming soon)"""
+#     pass
+#
+#
+# @podcasts.command("generate")
+# @click.argument("notebook_id")
+# @click.option("--speakers", "-s", default=2, type=int, help="Number of speakers (1-4)")
+# @click.option("--model", "-m", help="AI model to use")
+# def generate_podcast(notebook_id: str, speakers: int, model: Optional[str]):
+#     """Generate a podcast from notebook sources"""
+#     click.echo("Podcast generation via CLI is under development.")
+#     click.echo("Please use the Python API for podcast functionality.")
 
 
 if __name__ == "__main__":
