@@ -16,10 +16,9 @@ body:
       label: What did you do when it broke?
       description: Describe the steps you took that led to the bug
       placeholder: |
-        1. I went to the Notebooks page
-        2. I clicked on "Create New Notebook"
-        3. I filled in the form and clicked "Save"
-        4. Then the error occurred...
+        1. I imported the library: `from open_notebook import Notebook`
+        2. I called: `await Notebook.get(notebook_id)`
+        3. I received an error...
     validations:
       required: true
 
@@ -29,8 +28,8 @@ body:
       label: How did it break?
       description: What happened that was unexpected? What did you expect to happen instead?
       placeholder: |
-        Expected: The notebook should be created and I should see it in the list
-        Actual: I got an error message saying "Failed to create notebook"
+        Expected: The notebook should be created and saved to the database
+        Actual: I got an exception: DatabaseConnectionError
     validations:
       required: true
 
@@ -42,25 +41,23 @@ body:
         Please provide any error messages, logs, or screenshots that might help us understand the issue.
 
         **How to get logs:**
-        - Docker: `docker compose logs -f open_notebook`
-        - Check browser console (F12 → Console tab)
+        - Python traceback/stack trace
+        - Enable verbose logging: `export LOG_LEVEL=DEBUG`
       placeholder: |
         Paste logs here or drag and drop screenshots.
 
-        Error messages, stack traces, or browser console errors are very helpful!
+        Error messages, stack traces, or Python console errors are very helpful!
     validations:
       required: false
 
-  - type: dropdown
+  - type: textarea
     id: version
     attributes:
       label: Open Notebook Version
-      description: Which version are you using?
-      options:
-        - v1-latest (Docker)
-        - v1-latest-single (Docker)
-        - Latest from main branch
-        - Other (please specify in additional context)
+      description: Which version are you using? Run `pip show open-notebook`
+      placeholder: |
+        Version: 2.0.0
+        Python: 3.11.0
     validations:
       required: true
 
@@ -71,7 +68,8 @@ body:
       description: What environment are you running in?
       placeholder: |
         - OS: Ubuntu 22.04 / Windows 11 / macOS 14
-        - Browser: Chrome 120
+        - Python: 3.11 / 3.12
+        - Installation: pip / pip install -e
     validations:
       required: false
 

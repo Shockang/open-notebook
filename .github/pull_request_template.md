@@ -24,10 +24,10 @@ Fixes #<!-- issue number -->
 
 <!-- Describe the tests you ran and/or how you verified your changes work -->
 
-- [ ] Tested locally with Docker
-- [ ] Tested locally with development setup
+- [ ] Tested locally with library import
+- [ ] Tested with CLI commands
 - [ ] Added new unit tests
-- [ ] Existing tests pass (`uv run pytest`)
+- [ ] Existing tests pass (`pytest`)
 - [ ] Manual testing performed (describe below)
 
 **Test Details:**
@@ -37,11 +37,11 @@ Fixes #<!-- issue number -->
 
 <!-- This section helps ensure your PR aligns with our project vision -->
 
-**Which design principles does this PR support?** (See [DESIGN_PRINCIPLES.md](../DESIGN_PRINCIPLES.md))
+**Which design principles does this PR support?**
 
 - [ ] Privacy First
 - [ ] Simplicity Over Features
-- [ ] API-First Architecture
+- [ ] Library-First Architecture
 - [ ] Multi-Provider Flexibility
 - [ ] Extensibility Through Standards
 - [ ] Async-First for Performance
@@ -55,9 +55,7 @@ Fixes #<!-- issue number -->
 
 ### Code Quality
 - [ ] My code follows PEP 8 style guidelines (Python)
-- [ ] My code follows TypeScript best practices (Frontend)
 - [ ] I have added type hints to my code (Python)
-- [ ] I have added JSDoc comments where appropriate (TypeScript)
 - [ ] I have performed a self-review of my code
 - [ ] I have commented my code, particularly in hard-to-understand areas
 - [ ] My changes generate no new warnings or errors
@@ -65,42 +63,25 @@ Fixes #<!-- issue number -->
 ### Testing
 - [ ] I have added tests that prove my fix is effective or that my feature works
 - [ ] New and existing unit tests pass locally with my changes
-- [ ] I ran linting: `make ruff` or `ruff check . --fix`
-- [ ] I ran type checking: `make lint` or `uv run python -m mypy .`
+- [ ] I ran linting: `ruff check . --fix`
+- [ ] I ran tests: `pytest`
 
 ### Documentation
-- [ ] I have updated the relevant documentation in `/docs` (if applicable)
+- [ ] I have updated the README (if applicable)
 - [ ] I have added/updated docstrings for new/modified functions
-- [ ] I have updated the API documentation (if API changes were made)
 - [ ] I have added comments to complex logic
 
 ### Database Changes
-- [ ] I have created migration scripts for any database schema changes (in `/migrations`)
-- [ ] Migration includes both up and down scripts
+- [ ] I have created migration scripts for any database schema changes
 - [ ] Migration has been tested locally
 
 ### Breaking Changes
 - [ ] This PR includes breaking changes
 - [ ] I have documented the migration path for users
-- [ ] I have updated MIGRATION.md (if applicable)
-
-## Screenshots (if applicable)
-
-<!-- Add screenshots for UI changes -->
 
 ## Additional Context
 
 <!-- Add any other context about the PR here -->
-
-## Pre-Submission Verification
-
-Before submitting, please verify:
-
-- [ ] I have read [CONTRIBUTING.md](../CONTRIBUTING.md)
-- [ ] I have read [DESIGN_PRINCIPLES.md](../DESIGN_PRINCIPLES.md)
-- [ ] This PR addresses an approved issue that was assigned to me
-- [ ] I have not included unrelated changes in this PR
-- [ ] My PR title follows conventional commits format (e.g., "feat: add user authentication")
 
 ---
 

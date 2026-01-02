@@ -1,22 +1,27 @@
 # Open Notebook Refactoring - Iteration Notes
 
-## Status: Library Cleanup Complete ✅
+## Status: GitHub Templates Cleanup Complete ✅
 
-This iteration completed the cleanup of obsolete files and configurations from the web/API version.
+This iteration completed the cleanup of GitHub project files to align with the library-focused architecture.
 
 ## What Was Done This Iteration
 
-### Cleanup Tasks ✅
-- ✅ Removed obsolete `scripts/` directory (contained API/frontend-related scripts)
-- ✅ Cleaned up `pyproject.toml` (removed Streamlit/FastAPI references)
-- ✅ Simplified `.env.example` (removed API/frontend configuration, kept only AI and DB settings)
-- ✅ Removed `REFACTORING_DESIGN.md` (refactoring is complete)
+### GitHub Files Cleanup ✅
+- ✅ Removed Docker build workflows (`build-and-release.yml`, `build-dev.yml`)
+- ✅ Updated bug report template to remove web/UI references
+- ✅ Updated installation issue template for library installation
+- ✅ Cleaned up PR template to remove frontend/Docker references
+- ✅ Removed screenshots section from PR template (no UI)
 
-### Files Removed
-- `scripts/export_docs.py` - Documentation export script (no docs/ folder exists)
-- `scripts/wait-for-api.sh` - API server wait script (API removed)
-- `scripts/README.md` - Scripts documentation (no longer relevant)
-- `REFACTORING_DESIGN.md` - Design document for completed refactoring
+### Files Changed
+**Removed:**
+- `.github/workflows/build-and-release.yml` - Docker container build workflows
+- `.github/workflows/build-dev.yml` - Docker development builds
+
+**Updated:**
+- `.github/ISSUE_TEMPLATE/bug_report.yml` - Changed from web app to library context
+- `.github/ISSUE_TEMPLATE/installation_issue.yml` - Changed from Docker to pip/library focus
+- `.github/pull_request_template.md` - Removed frontend, TypeScript, Docker, and UI references
 
 ## Current State
 
@@ -27,18 +32,19 @@ This iteration completed the cleanup of obsolete files and configurations from t
 - ✅ Configuration files cleaned up
 - ✅ All core features working
 - ✅ All previous iterations' work maintained
+- ✅ GitHub templates aligned with library architecture
 
 **Removed This Iteration**:
-- ✅ Obsolete scripts directory
-- ✅ Streamlit/FastAPI configuration from pyproject.toml
-- ✅ API/frontend configuration from .env.example
-- ✅ Completed refactoring design document
+- ✅ Docker build workflows (no containers needed for library)
+- ✅ Web/UI references from issue templates
+- ✅ Frontend references from PR template
+- ✅ Docker testing references from PR template
 
 **Remaining Work**:
 - ⏳ AI chat not tested with real provider (requires API key)
 - ⏳ Podcast generation not tested
 
-## Project Structure (Clean)
+## Project Structure (Final)
 
 ```
 open-notebook/
@@ -51,6 +57,9 @@ open-notebook/
 │   ├── graphs/             # AI workflows
 │   ├── plugins/            # Content processing
 │   └── utils/              # Utilities
+├── .github/                # GitHub configuration
+│   ├── workflows/          # CI/CD (Claude Code review only)
+│   └── ISSUE_TEMPLATE/     # Issue templates (library-focused)
 ├── examples/               # Usage examples
 ├── tests/                  # Tests
 ├── data/                   # Local data (gitignored)
@@ -85,22 +94,23 @@ python -m open_notebook.cli notebooks list
 
 # 5. Run examples
 python examples/basic_usage.py
+python examples/chat_example.py
 ```
 
 ## Important Notes for Next Iteration
 
-1. **Library is clean and focused** - All web/API remnants have been removed. The project is now a pure Python library with CLI support.
+1. **Project is fully library-focused** - All GitHub templates, workflows, and documentation now reflect the Python library architecture.
 
-2. **Configuration simplified** - `.env.example` now only contains:
-   - AI provider configuration
-   - Database configuration
-   - Background command retry settings
-   - Optional API keys for external services
+2. **GitHub files cleaned**:
+   - Issue templates focus on library usage (pip, imports, async functions)
+   - PR template focuses on Python code quality (type hints, PEP 8, pytest)
+   - No Docker, frontend, or UI references remain
 
 3. **Project structure is minimal** - Only essential files remain:
    - Core library code
    - Examples
    - Tests
+   - Library-focused GitHub configuration
    - Documentation (README.md)
    - Configuration files
 
@@ -129,6 +139,7 @@ Progress made:
 - ✅ Examples updated and working
 - ✅ README.md complete and comprehensive
 - ✅ Project structure minimal and focused
+- ✅ GitHub templates and workflows library-focused
 - ⏳ AI chat not tested with real provider (needs API key)
 - ⏳ Podcast generation not tested
 
@@ -145,19 +156,19 @@ Progress made:
 ## What Changed in This Iteration
 
 ### Before
-- `scripts/` directory with API/frontend-related scripts
-- `pyproject.toml` contained Streamlit/FastAPI configuration
-- `.env.example` had extensive API/frontend configuration
-- `REFACTORING_DESIGN.md` documented the refactoring process
+- `.github/workflows/` contained Docker build workflows
+- Issue templates referenced Docker, web UI, browser console
+- PR template referenced frontend code, TypeScript, Docker testing
+- Screenshots section in PR template for UI changes
 
 ### After
-- Removed `scripts/` directory (no longer needed)
-- Cleaned `pyproject.toml` (removed web framework references)
-- Simplified `.env.example` (only AI and DB configuration)
-- Removed `REFACTORING_DESIGN.md` (refactoring complete)
+- Removed Docker build workflows (only Claude Code review workflows remain)
+- Issue templates focus on library installation (pip, imports, Python)
+- PR template focuses on Python code quality (type hints, pytest, ruff)
+- Removed screenshots section (no UI changes)
 
 ## Summary
 
-This iteration successfully completed the cleanup of obsolete files from the web/API version. The project is now a clean, minimal Python library with CLI support. All configuration files are focused on the library's core functionality: AI provider integration and database operations.
+This iteration successfully completed the cleanup of GitHub project files to align with the library architecture. All issue templates, PR templates, and workflows now reflect the Python library focus, with no references to Docker containers, web UI, or frontend code.
 
-The library is ready for use, with comprehensive documentation in the README.md and working examples in the `examples/` directory.
+The library is ready for use, with comprehensive documentation in the README.md, library-focused GitHub templates, and working examples in the `examples/` directory.
