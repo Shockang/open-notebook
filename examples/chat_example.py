@@ -6,8 +6,7 @@ to ask questions about your research materials.
 """
 
 import asyncio
-from open_notebook import Notebook, create_notebook
-from content_core import Content, ContentType
+from open_notebook import Notebook, create_notebook, Source
 from langchain_core.messages import HumanMessage
 
 
@@ -63,14 +62,14 @@ async def main():
     - Assisted migration to suitable new habitats
     """
 
-    content = Content(
-        content_type=ContentType.text,
-        title="Climate Change Research",
-        content=research_text.strip(),
-    )
-
     try:
-        source = await notebook.add_source(content)
+        # Create source directly
+        source = Source(
+            title="Climate Change Research",
+            full_text=research_text.strip()
+        )
+        await source.save()
+        await source.add_to_notebook(notebook.id)
         print(f"   ✓ Added source: {source.title}")
     except Exception as e:
         print(f"   ⚠ Could not add source: {e}")
