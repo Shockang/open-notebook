@@ -1,22 +1,27 @@
 # Open Notebook Refactoring - Iteration Notes
 
-## Status: Library Cleanup Complete ✅
+## Status: GitHub Artifacts Removed ✅
 
-This iteration completed the cleanup of obsolete files and configurations from the web/API version.
+This iteration completed the removal of GitHub-specific artifacts from the web/API version that are no longer needed for a Python library.
 
 ## What Was Done This Iteration
 
 ### Cleanup Tasks ✅
-- ✅ Removed obsolete `scripts/` directory (contained API/frontend-related scripts)
-- ✅ Cleaned up `pyproject.toml` (removed Streamlit/FastAPI references)
-- ✅ Simplified `.env.example` (removed API/frontend configuration, kept only AI and DB settings)
-- ✅ Removed `REFACTORING_DESIGN.md` (refactoring is complete)
+- ✅ Removed `.github/workflows/` directory (Docker build workflows)
+- ✅ Removed `.github/ISSUE_TEMPLATE/` directory (issue templates)
+- ✅ Removed `.github/pull_request_template.md` (PR template)
+- ✅ Removed `.github/` directory (now empty)
+- ✅ Removed internal `README.md` files (tests/, open_notebook/utils/)
 
-### Files Removed
-- `scripts/export_docs.py` - Documentation export script (no docs/ folder exists)
-- `scripts/wait-for-api.sh` - API server wait script (API removed)
-- `scripts/README.md` - Scripts documentation (no longer relevant)
-- `REFACTORING_DESIGN.md` - Design document for completed refactoring
+### Files Removed This Iteration
+- `.github/workflows/build-and-release.yml` - Docker container build workflow
+- `.github/workflows/build-dev.yml` - Development Docker build workflow
+- `.github/workflows/claude-code-review.yml` - Code review workflow
+- `.github/workflows/claude.yml` - Claude AI workflow
+- `.github/ISSUE_TEMPLATE/` - All issue template files
+- `.github/pull_request_template.md` - Pull request template
+- `tests/README.md` - Internal test documentation
+- `open_notebook/utils/README.md` - Internal utility documentation
 
 ## Current State
 
@@ -27,18 +32,18 @@ This iteration completed the cleanup of obsolete files and configurations from t
 - ✅ Configuration files cleaned up
 - ✅ All core features working
 - ✅ All previous iterations' work maintained
+- ✅ GitHub artifacts removed (no longer needed for library)
 
 **Removed This Iteration**:
-- ✅ Obsolete scripts directory
-- ✅ Streamlit/FastAPI configuration from pyproject.toml
-- ✅ API/frontend configuration from .env.example
-- ✅ Completed refactoring design document
+- ✅ All GitHub workflows (Docker builds, CI/CD)
+- ✅ GitHub issue and PR templates
+- ✅ Internal README files
 
 **Remaining Work**:
 - ⏳ AI chat not tested with real provider (requires API key)
 - ⏳ Podcast generation not tested
 
-## Project Structure (Clean)
+## Project Structure (Minimal)
 
 ```
 open-notebook/
@@ -57,7 +62,10 @@ open-notebook/
 ├── README.md               # Main documentation
 ├── .env.example            # Environment configuration
 ├── pyproject.toml          # Dependencies
-└── CLAUDE.md              # Project instructions
+├── uv.lock                 # Dependency lock file
+├── LICENSE                 # MIT License
+├── CLAUDE.md              # Project instructions
+└── SHARED_TASK_NOTES.md   # Iteration notes (this file)
 ```
 
 ## How to Test Current State
@@ -89,13 +97,9 @@ python examples/basic_usage.py
 
 ## Important Notes for Next Iteration
 
-1. **Library is clean and focused** - All web/API remnants have been removed. The project is now a pure Python library with CLI support.
+1. **Library is minimal and focused** - All GitHub-specific artifacts have been removed. The project is now a pure Python library with CLI support.
 
-2. **Configuration simplified** - `.env.example` now only contains:
-   - AI provider configuration
-   - Database configuration
-   - Background command retry settings
-   - Optional API keys for external services
+2. **No CI/CD workflows** - The `.github/` directory has been completely removed. If CI/CD is needed in the future, it should be simplified to just test the library (not build Docker containers).
 
 3. **Project structure is minimal** - Only essential files remain:
    - Core library code
@@ -129,6 +133,7 @@ Progress made:
 - ✅ Examples updated and working
 - ✅ README.md complete and comprehensive
 - ✅ Project structure minimal and focused
+- ✅ GitHub artifacts removed (workflows, templates)
 - ⏳ AI chat not tested with real provider (needs API key)
 - ⏳ Podcast generation not tested
 
@@ -145,19 +150,19 @@ Progress made:
 ## What Changed in This Iteration
 
 ### Before
-- `scripts/` directory with API/frontend-related scripts
-- `pyproject.toml` contained Streamlit/FastAPI configuration
-- `.env.example` had extensive API/frontend configuration
-- `REFACTORING_DESIGN.md` documented the refactoring process
+- `.github/workflows/` directory with Docker build workflows
+- `.github/ISSUE_TEMPLATE/` with issue templates
+- `.github/pull_request_template.md` with PR template
+- `tests/README.md` with placeholder content
+- `open_notebook/utils/README.md` with internal documentation
 
 ### After
-- Removed `scripts/` directory (no longer needed)
-- Cleaned `pyproject.toml` (removed web framework references)
-- Simplified `.env.example` (only AI and DB configuration)
-- Removed `REFACTORING_DESIGN.md` (refactoring complete)
+- Removed `.github/` directory entirely (no longer needed)
+- Removed internal `README.md` files (not user-facing)
+- Project is now just a Python library with no CI/CD or GitHub automation
 
 ## Summary
 
-This iteration successfully completed the cleanup of obsolete files from the web/API version. The project is now a clean, minimal Python library with CLI support. All configuration files are focused on the library's core functionality: AI provider integration and database operations.
+This iteration successfully removed all GitHub-specific artifacts that were remnants from the web/API version. The project is now a clean, minimal Python library with CLI support and no CI/CD infrastructure.
 
-The library is ready for use, with comprehensive documentation in the README.md and working examples in the `examples/` directory.
+The library is ready for use, with comprehensive documentation in the README.md and working examples in the `examples/` directory. If CI/CD is needed in the future, it should be simplified to just test the library functionality (not build Docker containers).
