@@ -103,7 +103,11 @@ async def list_notebooks(archived: bool = False) -> list[Notebook]:
         >>> for nb in notebooks:
         ...     print(f"{nb.name}: {nb.source_count} sources")
     """
-    return await Notebook.get_all(archived=archived)
+    notebooks = await Notebook.get_all()
+    if archived:
+        return notebooks
+    else:
+        return [nb for nb in notebooks if not nb.archived]
 
 
 # Add convenience functions to exports
