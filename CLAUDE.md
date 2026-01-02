@@ -1,3 +1,8 @@
 
-We have a good amount of documentation on this project on the ./docs folder. Please read through them when necessary, and always review the docs/index.md file before starting a new feature so you know at least which docs are available. 
+This project is now a Python library. Documentation is available in the README.md file, and examples are provided in the `examples/` directory.
+
+Before starting a new feature, please:
+1. Review the README.md for project overview and API reference
+2. Check the examples/ directory for usage patterns
+3. Review the SHARED_TASK_NOTES.md for ongoing work context
 
