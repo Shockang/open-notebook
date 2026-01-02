@@ -96,7 +96,8 @@ def sources():
 @click.option("--url", "-u", help="URL to add as source")
 @click.option("--file", "-f", type=click.Path(exists=True), help="File path to add as source")
 @click.option("--text", "-t", help="Text content to add as source")
-def add_source(notebook_id: str, url: Optional[str], file: Optional[str], text: Optional[str]):
+@click.option("--title", "-h", help="Title for the source")
+def add_source(notebook_id: str, url: Optional[str], file: Optional[str], text: Optional[str], title: Optional[str]):
     """Add a source to a notebook"""
 
     if not any([url, file, text]):
@@ -104,26 +105,37 @@ def add_source(notebook_id: str, url: Optional[str], file: Optional[str], text: 
         sys.exit(1)
 
     async def _add():
-        from open_notebook import Notebook
-        from content_core import Content, ContentType
+        from open_notebook import Source
+        from open_notebook.domain.notebook import Asset
 
-        nb = await Notebook.get(notebook_id)
-
-        # Create content based on input type
+        # Determine source content and asset
         if url:
-            content = await Content.from_url(url)
+            # For URL, create an Asset with the URL
+            asset = Asset(url=url)
+            source_text = f"URL: {url}"
+            source_title = title or f"URL: {url}"
         elif file:
-            content = await Content.from_file(file)
+            # Read file content
+            with open(file, 'r') as f:
+                file_content = f.read()
+            asset = Asset(file_path=file)
+            source_text = file_content
+            source_title = title or file
         else:  # text
-            content = Content(
-                content_type=ContentType.text,
-                title="Manual Text Entry",
-                content=text,
-            )
+            asset = None
+            source_text = text
+            source_title = title or "Manual Text Entry"
 
-        # Add source to notebook
-        source = await nb.add_source(content)
-        click.echo(f"✓ Added source to notebook: {nb.name}")
+        # Create and save source
+        source = Source(
+            title=source_title,
+            full_text=source_text,
+            asset=asset
+        )
+        await source.save()
+        await source.add_to_notebook(notebook_id)
+
+        click.echo(f"✓ Added source to notebook")
         click.echo(f"  Source ID: {source.id}")
         click.echo(f"  Title: {source.title}")
 
@@ -149,9 +161,8 @@ def list_sources(notebook_id: str):
         for source in sources:
             click.echo(f"  • {source.title}")
             click.echo(f"    ID: {source.id}")
-            click.echo(f"    Type: {source.source_type}")
-            if source.url:
-                click.echo(f"    URL: {source.url}")
+            if source.asset and source.asset.url:
+                click.echo(f"    URL: {source.asset.url}")
             click.echo()
 
     asyncio.run(_list())
